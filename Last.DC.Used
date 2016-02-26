@@ -1,0 +1,5 @@
+#!/bin/sh
+
+LastDC=$( /usr/libexec/PlistBuddy -c "print 'last used servers':'/Active Directory/DTINC':host" /Library/Preferences/OpenDirectory/DynamicData/Active\ Directory/DTINC.plist )
+
+echo "<result>$LastDC</result>"
