@@ -1,0 +1,7 @@
+#!/bin/bash
+
+plist="/Library/Preferences/com.dtinccasper.image" # Absolute path to the plist
+
+echo "<result>`defaults read $plist date`</result>"
+
+exit 0
