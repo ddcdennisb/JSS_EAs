@@ -1,0 +1,14 @@
+#!/bin/sh
+
+#replace % with credintials for your JSS
+jssUser=%
+jssPass='%'
+
+serial=$(ioreg -c IOPlatformExpertDevice -d 2 | awk -F\" '/IOPlatformSerialNumber/{print $(NF-1)}')
+
+#fill in your JSS URL in the CURL Address
+response=$(curl -k https://your.jss.com:8443/JSSResource/computers/serialnumber/${serial} --user "${jssUser}:${jssPass}")
+mdmCap=$(echo $response | /usr/bin/awk -F'mdm_capable|mdm_capable' '{print $2}');
+
+
+echo "<result>$mdmCap</result>"
