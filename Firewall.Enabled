@@ -1,0 +1,9 @@
+#!/bin/sh
+
+fw=$(defaults read /Library/Preferences/com.apple.alf globalstate)
+
+if [ "$fw" == 0 ]; then
+echo "<result>No</result>"
+else
+    echo "<result>Yes</result>"
+fi
