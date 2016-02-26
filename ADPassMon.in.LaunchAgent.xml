@@ -1,14 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<extensionAttribute>
-<displayName>ADPassMon in LaunchAgent</displayName>
-<description/>
-<dataType>string</dataType>
-<scriptContentsMac>#!/bin/sh&#13;
-&#13;
-if [ -e /Library/LaunchAgents/com.ADPassMon.plist ]; then&#13;
-echo "&lt;result&gt;Yes&lt;/result&gt;"&#13;
-else&#13;
-echo "&lt;result&gt;No&lt;/result&gt;"&#13;
-fi</scriptContentsMac>
-<scriptContentsWindows/>
-</extensionAttribute>
+#!/bin/sh
+
+if [ -e /Library/LaunchAgents/com.ADPassMon.plist ]; then
+echo "<result>Yes</result>"
+else
+echo "<result>No</result>"
+fi
