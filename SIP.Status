@@ -1,0 +1,9 @@
+#!/bin/sh
+
+sipstatus=`csrutil status`
+
+if [[ ${sipstatus} =~ "System Integrity Protection status: enabled." ]]; then
+echo "<result>Enabled</result>"
+else
+echo "<result>Disabled</result>"
+fi
