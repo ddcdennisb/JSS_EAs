@@ -1,0 +1,4 @@
+#!/bin/sh
+
+condition=$(system_profiler SPPowerDataType |awk '/Condition/ {print $2" "$3" "$4" "$5}')
+echo "<result>$condition</result>"
