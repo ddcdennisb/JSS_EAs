@@ -8,6 +8,9 @@ This will check to see if there is a LaunchAgent for the ADPassMon App (LA would
 <h4>ADPassMon.in.Startup</h4>
 This will check to see if ADPassMon has been added to the Start Up Items for the logged in user.
 
+<h4>BatteryCondition</h4>
+This will return the Condition of the Battery as reported in the Menu Bar. (Normal, Service Battery, etc)
+
 <h4>DHCP.Enabled.Primary</h4>
 This will return if DHCP is enabled on the machines Primary Network Interface.
 
