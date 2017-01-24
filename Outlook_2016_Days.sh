@@ -1,0 +1,10 @@
+#!/bin/sh
+
+#Get ItemUsedDates count
+count=`mdls /Applications/Microsoft\ Outlook.app -name kMDItemUsedDates |awk '{print $1}' |awk -F'"' '{print $2}' | awk -F_ '$1{print $1}'`
+
+#days=`echo "$count" | wc -l`
+
+#echo $days
+
+echo "<result>$count</result>"
