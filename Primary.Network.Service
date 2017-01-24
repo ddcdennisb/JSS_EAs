@@ -18,7 +18,7 @@ SERVICE_NAME=`scutil_query Setup:/Network/Service/$SERVICE_GUID | grep "UserDefi
 
 echo $SERVICE_NAME
 
-PRIMARY_SERVICE=`networksetup -listnetworkserviceorder |tail +2 |grep "$SERVICE_NAME" |grep "en" |awk '{print $5}'| grep "en" | awk '{print substr($1,0,3)}'`
+PRIMARY_SERVICE=`networksetup -listnetworkserviceorder | grep "$SERVICE_NAME" | tail +2 | head -1 | awk '{print $NF}' | awk '{print substr($1,0,3)}'`
 
 
 if [[ ${PRIMARY_SERVICE} == "" ]]; then
