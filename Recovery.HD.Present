@@ -1,8 +1,9 @@
 #!/bin/sh
 
-recoveryHDPresent=`/usr/sbin/diskutil list | grep "Recovery HD" | grep disk0`
+recoveryHDPresent=`/usr/sbin/diskutil list | grep "Recovery HD"`
+recoveryVolumePresent=`/usr/sbin/diskutil list | grep "APFS Volume Recovery"`
 
-if [ "$recoveryHDPresent" != "" ]; then
+if [[ "$recoveryHDPresent" != "" ]] || [[ "$recoveryVolumePresent" != "" ]] ; then
 	echo "<result>Present</result>"
 else
 	echo "<result>Not Present</result>"
