@@ -1,0 +1,45 @@
+#!/bin/bash
+
+# xttr.recovery.hd.sh
+# ©2016 brock walters jamf
+
+# JSS extension attribute for determining OS X Recovery HD version
+
+# check for root user execution
+
+if [ "$EUID" -ne 0 ]
+then
+    >&2 /bin/echo $'\nerror: this script must be executed by the root user\n'
+    exit
+fi
+
+# discover Recovery HD device id
+
+rcdvid=$(/usr/sbin/diskutil list | /usr/bin/awk '/Recovery HD/{print $NF}')
+
+# create temporary mount point, silently mount Recovery HD, collect Recovery HD OS version
+
+/bin/mkdir /Volumes/tmpmnt/
+/sbin/mount -r -t hfs -o nobrowse /dev/"$rcdvid" /Volumes/tmpmnt/
+/bin/sleep 1.5
+version=$(/usr/bin/defaults read /Volumes/tmpmnt/com.apple.recovery.boot/SystemVersion.plist | /usr/bin/awk '/ProductVersion/{print $NF}' | /usr/bin/sed 's/"//g;s/;//g')
+
+# unmount Recovery HD, adjust to Apple_Boot volume, delete temporary mount point
+
+/usr/sbin/diskutil quiet umount "$rcdvid"
+/bin/sleep 1.5
+ref=$(/usr/bin/sw_vers -productVersion | /usr/bin/awk -F. '{print $2}')
+if [ "$ref" -lt 11 ]
+then
+	/usr/sbin/asr adjust --target /dev/"$rcdvid" --settype Apple_Boot
+fi
+/bin/rm -rf /Volumes/tmpmnt/
+
+# populate extension attribute value
+
+if [ "$version" = "" ]
+then
+	echo "<result>no Recovery HD volume</result>"
+else
+	echo "<result>$version</result>"
+fi
