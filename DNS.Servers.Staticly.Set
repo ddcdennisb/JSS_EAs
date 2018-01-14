@@ -19,11 +19,11 @@ SERVICE_NAME=`scutil_query Setup:/Network/Service/$SERVICE_GUID | grep "UserDefi
 echo $SERVICE_NAME
 
 TestDNS=$(networksetup -getdnsservers "$SERVICE_NAME" | grep -w There)
-SearchDomains=$(networksetup -getdnsservers "$SERVICE_NAME")
+dnsServers=$(networksetup -getdnsservers "$SERVICE_NAME")
 
-if [[ ${SearchDomains} =~ ' is not a recognized network' ]] || [[ ${SearchDomains} =~ 'There ' ]]; then
+if [[ ${dnsServers} =~ ' is not a recognized network' ]] || [[ ${dnsServers} =~ 'There ' ]]; then
     echo "<result></result>"
 else
-    echo "<result>$SearchDomains</result>"
+    echo "<result>$dnsServers</result>"
     exit 0
 fi
