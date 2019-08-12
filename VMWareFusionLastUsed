@@ -1,0 +1,5 @@
+#!/bin/sh
+
+#Get ItemUsedDates count
+lastUsed=$(mdls "/Applications/VMware Fusion.app" -name kMDItemLastUsedDate | awk '/kMDItemLastUsedDate =/{print $3}')
+echo "<result>$lastUsed</result>"
