@@ -1,0 +1,5 @@
+#!/bin/sh
+
+filecount=$(sysctl -A | grep kern.maxfiles)
+
+    echo "<result>$filecount</result>"
